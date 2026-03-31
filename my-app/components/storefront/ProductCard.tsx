@@ -97,6 +97,7 @@ export function ProductCard({ index, product }: ProductCardProps) {
               {product.name}
             </h3>
             <div
+              className="product-pricing"
               style={{
                 marginTop: 8,
                 display: "flex",
@@ -132,6 +133,7 @@ export function ProductCard({ index, product }: ProductCardProps) {
               )}
             </div>
             <div
+              className="product-subtitle"
               style={{
                 marginTop: 6,
                 fontSize: 11,

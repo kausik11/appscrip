@@ -176,26 +176,21 @@ export function Footer() {
         />
 
         <div className="footer-links">
-          <section>
-            <h3
-              style={{
-                margin: 0,
-                fontSize: 24,
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-              }}
-            >
-              metta muse
-            </h3>
-            <div
-              style={{
-                display: "grid",
-                gap: 10,
-                marginTop: 20,
-                fontSize: 13,
-                color: "rgba(255,255,255,0.74)",
-              }}
-            >
+          <section className="footer-link-group">
+            <div className="footer-link-heading">
+              <h3
+                style={{
+                  margin: 0,
+                  fontSize: 24,
+                  fontWeight: 700,
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                metta muse
+              </h3>
+              <span className="footer-mobile-chevron" aria-hidden="true" />
+            </div>
+            <div className="footer-link-content">
               <a href="#">About Us</a>
               <a href="#">Stories</a>
               <a href="#">Artisans</a>
@@ -205,22 +200,17 @@ export function Footer() {
             </div>
           </section>
 
-          <section>
-            <h3
-              className="display-font"
-              style={{ margin: 0, fontSize: 18, fontWeight: 700 }}
-            >
-              Quick Links
-            </h3>
-            <div
-              style={{
-                display: "grid",
-                gap: 10,
-                marginTop: 20,
-                fontSize: 13,
-                color: "rgba(255,255,255,0.74)",
-              }}
-            >
+          <section className="footer-link-group">
+            <div className="footer-link-heading">
+              <h3
+                className="display-font"
+                style={{ margin: 0, fontSize: 18, fontWeight: 700 }}
+              >
+                Quick Links
+              </h3>
+              <span className="footer-mobile-chevron" aria-hidden="true" />
+            </div>
+            <div className="footer-link-content">
               <a href="#">Orders &amp; Shipping</a>
               <a href="#">Join/Login as a Seller</a>
               <a href="#">Payment &amp; Pricing</a>
@@ -231,62 +221,67 @@ export function Footer() {
             </div>
           </section>
 
-          <section>
-            <h3
-              className="display-font"
-              style={{ margin: 0, fontSize: 18, fontWeight: 700 }}
-            >
-              Follow Us
-            </h3>
-            <div style={{ display: "flex", gap: 10, marginTop: 18 }}>
-              <button
-                className="icon-button"
-                aria-label="Instagram"
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "50%",
-                  border: "1px solid rgba(255,255,255,0.25)",
-                  display: "grid",
-                  placeItems: "center",
-                }}
-              >
-                <InstagramIcon />
-              </button>
-              <button
-                className="icon-button"
-                aria-label="LinkedIn"
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "50%",
-                  border: "1px solid rgba(255,255,255,0.25)",
-                  display: "grid",
-                  placeItems: "center",
-                }}
-              >
-                <LinkedInIcon />
-              </button>
-            </div>
-
-            <div style={{ marginTop: 28 }}>
-              <h4
+          <section className="footer-link-group">
+            <div className="footer-link-heading">
+              <h3
                 className="display-font"
-                style={{ margin: 0, fontSize: 16, fontWeight: 700 }}
+                style={{ margin: 0, fontSize: 18, fontWeight: 700 }}
               >
-                metta muse Accepts
-              </h4>
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: 8,
-                  marginTop: 14,
-                }}
-              >
-                {paymentBadges.map((badge) => (
-                  <PaymentBadge key={badge} type={badge} />
-                ))}
+                Follow Us
+              </h3>
+              <span className="footer-mobile-chevron" aria-hidden="true" />
+            </div>
+            <div className="footer-link-content">
+              <div style={{ display: "flex", gap: 10, marginTop: 18 }}>
+                <button
+                  className="icon-button"
+                  aria-label="Instagram"
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: "50%",
+                    border: "1px solid rgba(255,255,255,0.25)",
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  <InstagramIcon />
+                </button>
+                <button
+                  className="icon-button"
+                  aria-label="LinkedIn"
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: "50%",
+                    border: "1px solid rgba(255,255,255,0.25)",
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  <LinkedInIcon />
+                </button>
+              </div>
+
+              <div style={{ marginTop: 28 }}>
+                <h4
+                  className="display-font"
+                  style={{ margin: 0, fontSize: 16, fontWeight: 700 }}
+                >
+                  metta muse Accepts
+                </h4>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 8,
+                    marginTop: 14,
+                  }}
+                >
+                  {paymentBadges.map((badge) => (
+                    <PaymentBadge key={badge} type={badge} />
+                  ))}
+                </div>
               </div>
             </div>
           </section>

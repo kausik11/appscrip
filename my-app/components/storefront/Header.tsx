@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {
+  HiBars3,
   HiMiniChevronUp,
   HiOutlineHeart,
   HiOutlineMagnifyingGlass,
@@ -25,6 +26,10 @@ export function Header({ navItems }: HeaderProps) {
           padding: "18px 0 22px",
         }}
       >
+        <button type="button" className="icon-button header-menu-button" aria-label="Open menu">
+          <HiBars3 size={21} />
+        </button>
+
         <div className="header-logo" style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <Image
             src="/logo.jpg"
@@ -54,10 +59,10 @@ export function Header({ navItems }: HeaderProps) {
           <button className="icon-button" aria-label="Bag">
             <IoBagOutline size={18} />
           </button>
-          <button className="icon-button" aria-label="Account">
+          <button className="icon-button header-account-button" aria-label="Account">
             <HiOutlineUser size={19} />
           </button>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <div className="header-language" style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <LuGlobe size={16} />
             <span className="display-font" style={{ fontSize: 11, letterSpacing: "0.08em" }}>
               Eng
@@ -88,6 +93,12 @@ export function Header({ navItems }: HeaderProps) {
       </nav>
 
       <hr className="thin-rule" />
+
+      <div className="content-shell mobile-breadcrumb">
+        <span>Home</span>
+        <span className="mobile-breadcrumb-sep">|</span>
+        <span style={{ color: "var(--ink)" }}>Shop</span>
+      </div>
     </header>
   );
 }
