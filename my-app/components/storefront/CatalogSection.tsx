@@ -80,7 +80,7 @@ function CatalogSectionBody({
               letterSpacing: "0.08em",
             }}
           >
-            3425 Items
+            {products.length} Items
           </span>
           <button
             className="icon-button body-muted"

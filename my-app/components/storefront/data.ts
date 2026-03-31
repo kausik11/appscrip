@@ -374,3 +374,88 @@ export const products: Product[] = [
     },
   },
 ];
+
+type DummyJsonProduct = {
+  id: number;
+  title: string;
+  category: string;
+  price: number;
+  thumbnail?: string;
+  images?: string[];
+  availabilityStatus?: string;
+  brand?: string;
+  discountPercentage?: number;
+  stock: number;
+  tags?: string[];
+};
+
+type DummyJsonProductsResponse = {
+  products: DummyJsonProduct[];
+};
+
+const productArtSequence: Product["art"][] = [
+  "backpack",
+  "toy",
+  "strap",
+  "cap",
+  "roll",
+  "woven",
+  "satchel",
+];
+
+function mapCategoryToSegment(category: string) {
+  const value = category.toLowerCase();
+
+  if (value.includes("bag")) return "Bags";
+  if (value.includes("shoe") || value.includes("watch") || value.includes("access")) {
+    return "Accessories";
+  }
+  if (value.includes("shirt") || value.includes("dress") || value.includes("top")) {
+    return "Soft Toys";
+  }
+
+  return "Small Goods";
+}
+
+function mapDummyProduct(product: DummyJsonProduct, index: number): Product {
+  const segment = mapCategoryToSegment(product.category);
+
+  return {
+    id: String(product.id),
+    name: product.title,
+    subtitle: `${product.brand ?? "DummyJSON"} · $${product.price.toFixed(2)}`,
+    priceHint:
+      product.discountPercentage && product.discountPercentage > 0
+        ? `${product.discountPercentage.toFixed(0)}% off`
+        : "Recommended",
+    art: productArtSequence[index % productArtSequence.length],
+    image: product.thumbnail ?? product.images?.[0],
+    badge: product.stock === 0 ? "Out of stock" : undefined,
+    isOutOfStock: product.stock === 0,
+    isNew: index < 4,
+    tags: {
+      idealFor: index % 3 === 0 ? "Travel" : index % 3 === 1 ? "Work" : "Weekend",
+      occasion: index % 2 === 0 ? "Daily" : "Office",
+      work: index % 2 === 0 ? "Hybrid" : "Creative",
+      fabric: segment === "Accessories" ? "Leather" : "Canvas",
+      segment,
+      suitableFor: "Unisex",
+      rawMaterials: segment === "Accessories" ? "Leather" : "Recycled",
+      pattern: product.tags?.includes("fragrance") ? "Woven" : "Solid",
+    },
+  };
+}
+
+export async function getProducts(): Promise<Product[]> {
+  const response = await fetch("https://dummyjson.com/products", {
+    next: { revalidate: 3600 },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch products: ${response.status}`);
+  }
+
+  const data = (await response.json()) as DummyJsonProductsResponse;
+
+  return data.products.map(mapDummyProduct);
+}

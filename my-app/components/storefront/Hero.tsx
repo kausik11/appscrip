@@ -13,13 +13,9 @@ export function Hero({ stats }: HeroProps) {
         }}
       >
         <h1
-          className="display-font"
+          className="hero-title"
           style={{
             margin: 0,
-            fontSize: "clamp(3rem, 5vw, 4.5rem)",
-            lineHeight: 0.92,
-            letterSpacing: "0.05em",
-            fontWeight: 500,
           }}
         >
           Discover Our Products

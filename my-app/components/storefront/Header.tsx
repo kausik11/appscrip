@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BagIcon, ChevronIcon, GlobeIcon, HeartIcon, SearchIcon, UserIcon } from "./icons";
 
 type HeaderProps = {
@@ -17,34 +18,15 @@ export function Header({ navItems }: HeaderProps) {
           padding: "18px 0 22px",
         }}
       >
-        <div
-          aria-hidden="true"
-          style={{
-            width: 18,
-            height: 18,
-            border: "1px solid var(--ink)",
-            position: "relative",
-            transform: "rotate(45deg)",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: 3,
-              border: "1px solid var(--ink)",
-            }}
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <Image
+            src="/logo.jpg"
+            alt="Store logo"
+            width={110}
+            height={42}
+            priority
+            style={{ width: "auto", height: 42, objectFit: "contain" }}
           />
-        </div>
-
-        <div
-          className="display-font"
-          style={{
-            fontSize: 22,
-            fontWeight: 700,
-            letterSpacing: "0.06em",
-          }}
-        >
-          Logo
         </div>
 
         <div

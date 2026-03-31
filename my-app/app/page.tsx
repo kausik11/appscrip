@@ -6,12 +6,14 @@ import { TopStrip } from "@/components/storefront/TopStrip";
 import {
   featuredStats,
   filterSections,
+  getProducts,
   navItems,
-  products,
   utilityLinks,
 } from "@/components/storefront/data";
 
-export default function Home() {
+export default async function Home() {
+  const products = await getProducts();
+
   return (
     <main className="page-shell">
       <TopStrip items={utilityLinks} />

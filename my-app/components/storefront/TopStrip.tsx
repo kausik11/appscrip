@@ -23,8 +23,8 @@ export function TopStrip({ items }: TopStripProps) {
           textTransform: "uppercase",
         }}
       >
-        {items.map((item) => (
-          <span key={item}>{item}</span>
+        {items.map((item, index) => (
+          <span key={`${item}-${index}`}>{item}</span>
         ))}
       </div>
     </div>

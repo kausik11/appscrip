@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FilledHeartIcon, HeartIcon } from "./icons";
 import { ProductArt } from "./ProductArt";
 import { useStorefront } from "./StorefrontProvider";
@@ -60,7 +61,17 @@ export function ProductCard({ index, product }: ProductCardProps) {
           </div>
         )}
 
-        <ProductArt art={product.art} />
+        {product.image ? (
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 820px) 50vw, 33vw"
+            style={{ objectFit: "contain", padding: 20 }}
+          />
+        ) : (
+          <ProductArt art={product.art} />
+        )}
       </div>
 
       <div>

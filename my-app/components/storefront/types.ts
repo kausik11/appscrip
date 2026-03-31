@@ -13,6 +13,7 @@ export type Product = {
   subtitle: string;
   priceHint: string;
   art: ProductArt;
+  image?: string;
   badge?: string;
   isOutOfStock?: boolean;
   isNew?: boolean;
