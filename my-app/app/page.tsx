@@ -5,7 +5,6 @@ import { Hero } from "@/components/storefront/Hero";
 import { TopStrip } from "@/components/storefront/TopStrip";
 import {
   buildFilterSections,
-  filterSections,
   getProducts,
   navItems,
   utilityLinks,
@@ -20,10 +19,7 @@ export default async function Home() {
       <TopStrip items={utilityLinks} />
       <Header navItems={navItems} />
       <Hero />
-      <CatalogSection
-        products={products}
-        filterSections={derivedFilterSections.length ? derivedFilterSections : filterSections}
-      />
+      <CatalogSection products={products} filterSections={derivedFilterSections} />
       <Footer />
     </main>
   );
