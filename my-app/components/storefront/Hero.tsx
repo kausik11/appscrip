@@ -4,8 +4,9 @@ type HeroProps = {
 
 export function Hero({ stats }: HeroProps) {
   return (
-    <section className="content-shell" style={{ padding: "54px 0 34px" }}>
+    <section className="content-shell hero-section" style={{ padding: "54px 0 34px" }}>
       <div
+        className="hero-copy"
         style={{
           maxWidth: 720,
           margin: "0 auto",
@@ -21,6 +22,7 @@ export function Hero({ stats }: HeroProps) {
           Discover Our Products
         </h1>
         <p
+          className="hero-description"
           style={{
             margin: "18px auto 0",
             maxWidth: 620,
@@ -35,6 +37,7 @@ export function Hero({ stats }: HeroProps) {
       </div>
 
       <div
+        className="hero-stats"
         style={{
           display: "flex",
           justifyContent: "space-between",

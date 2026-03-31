@@ -12,7 +12,7 @@ export function TopStrip({ items }: TopStripProps) {
       }}
     >
       <div
-        className="content-shell"
+        className="content-shell top-strip-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, minmax(0, 1fr))",

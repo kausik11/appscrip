@@ -51,6 +51,7 @@ export function Footer() {
                 }}
               />
               <button
+                className="newsletter-submit"
                 type="submit"
                 style={{
                   minHeight: 44,

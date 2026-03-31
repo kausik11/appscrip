@@ -9,7 +9,7 @@ export function Header({ navItems }: HeaderProps) {
   return (
     <header>
       <div
-        className="content-shell"
+        className="content-shell header-bar"
         style={{
           display: "flex",
           alignItems: "center",
@@ -18,7 +18,7 @@ export function Header({ navItems }: HeaderProps) {
           padding: "18px 0 22px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <div className="header-logo" style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <Image
             src="/logo.jpg"
             alt="Store logo"
@@ -30,6 +30,7 @@ export function Header({ navItems }: HeaderProps) {
         </div>
 
         <div
+          className="header-actions"
           style={{
             display: "flex",
             alignItems: "center",
@@ -60,7 +61,7 @@ export function Header({ navItems }: HeaderProps) {
       </div>
 
       <nav
-        className="content-shell"
+        className="content-shell header-nav"
         style={{
           display: "flex",
           justifyContent: "center",

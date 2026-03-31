@@ -54,6 +54,7 @@ function CatalogSectionBody({
   return (
     <section className="content-shell" style={{ paddingBottom: 56 }}>
       <div
+        className="catalog-toolbar"
         style={{
           display: "flex",
           alignItems: "center",
@@ -65,6 +66,7 @@ function CatalogSectionBody({
         }}
       >
         <div
+          className="catalog-toolbar-meta"
           style={{
             display: "flex",
             alignItems: "center",
@@ -97,6 +99,7 @@ function CatalogSectionBody({
         </div>
 
         <label
+          className="catalog-toolbar-sort"
           style={{
             display: "flex",
             alignItems: "center",

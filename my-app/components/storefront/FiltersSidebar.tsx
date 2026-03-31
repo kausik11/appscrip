@@ -19,7 +19,7 @@ export function FiltersSidebar({ sections }: FiltersSidebarProps) {
   } = useStorefront();
 
   return (
-    <aside>
+    <aside className="filters-sidebar">
       <label
         style={{
           display: "flex",
