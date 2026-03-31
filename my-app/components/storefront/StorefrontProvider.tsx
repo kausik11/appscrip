@@ -3,7 +3,13 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { FilterSection } from "./types";
 
-type SortOption = "recommended" | "newest" | "wishlist";
+type SortOption =
+  | "recommended"
+  | "newest"
+  | "popular"
+  | "priceHighToLow"
+  | "priceLowToHigh"
+  | "wishlist";
 
 type StorefrontContextValue = {
   customizableOnly: boolean;

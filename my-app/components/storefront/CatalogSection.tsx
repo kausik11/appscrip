@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { FiltersSidebar } from "./FiltersSidebar";
 import { ProductCard } from "./ProductCard";
 import { StorefrontProvider, useStorefront } from "./StorefrontProvider";
@@ -9,6 +10,15 @@ type CatalogSectionProps = {
   filterSections: FilterSection[];
   products: Product[];
 };
+
+const sortOptions = [
+  { value: "recommended", label: "Recommended" },
+  { value: "newest", label: "Newest First" },
+  { value: "popular", label: "Popular" },
+  { value: "priceHighToLow", label: "Price : High To Low" },
+  { value: "priceLowToHigh", label: "Price : Low To High" },
+  { value: "wishlist", label: "Wishlist First" },
+] as const;
 
 export function CatalogSection({
   filterSections,
@@ -29,8 +39,21 @@ function CatalogSectionBody({
   filterSections,
   products,
 }: CatalogSectionProps) {
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const sortMenuRef = useRef<HTMLDivElement | null>(null);
   const { customizableOnly, favorites, selectedFilters, setSortBy, sortBy } =
     useStorefront();
+
+  useEffect(() => {
+    function handlePointerDown(event: MouseEvent) {
+      if (!sortMenuRef.current?.contains(event.target as Node)) {
+        setIsSortOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, []);
 
   let visibleProducts = products.filter((product) => {
     if (customizableOnly && product.isOutOfStock) {
@@ -64,6 +87,27 @@ function CatalogSectionBody({
       return Number(favorites.includes(b.id)) - Number(favorites.includes(a.id));
     });
   }
+
+  if (sortBy === "popular") {
+    visibleProducts = [...visibleProducts].sort(
+      (a, b) => (b.rating ?? 0) - (a.rating ?? 0),
+    );
+  }
+
+  if (sortBy === "priceHighToLow") {
+    visibleProducts = [...visibleProducts].sort(
+      (a, b) => (b.price ?? 0) - (a.price ?? 0),
+    );
+  }
+
+  if (sortBy === "priceLowToHigh") {
+    visibleProducts = [...visibleProducts].sort(
+      (a, b) => (a.price ?? 0) - (b.price ?? 0),
+    );
+  }
+
+  const activeSort =
+    sortOptions.find((option) => option.value === sortBy) ?? sortOptions[0];
 
   return (
     <section className="content-shell" style={{ paddingBottom: 56 }}>
@@ -112,12 +156,14 @@ function CatalogSectionBody({
           </button>
         </div>
 
-        <label
+        <div
           className="catalog-toolbar-sort"
+          ref={sortMenuRef}
           style={{
             display: "flex",
             alignItems: "center",
             gap: 14,
+            position: "relative",
           }}
         >
           <span
@@ -130,22 +176,51 @@ function CatalogSectionBody({
           >
             Sort By
           </span>
-          <span className="select-wrap">
-            <select
-              className="catalog-select"
-              value={sortBy}
-              onChange={(event) =>
-                setSortBy(
-                  event.target.value as "recommended" | "newest" | "wishlist",
-                )
-              }
+          <div className="sort-menu-shell">
+            <button
+              type="button"
+              className="catalog-sort-trigger"
+              aria-expanded={isSortOpen}
+              aria-haspopup="menu"
+              onClick={() => setIsSortOpen((current) => !current)}
             >
-              <option value="recommended">Recommended</option>
-              <option value="newest">Newest</option>
-              <option value="wishlist">Wishlist First</option>
-            </select>
-          </span>
-        </label>
+              <span className="display-font">{activeSort.label}</span>
+              <span
+                className="catalog-sort-chevron"
+                aria-hidden="true"
+                data-open={isSortOpen}
+              />
+            </button>
+
+            {isSortOpen && (
+              <div className="catalog-sort-menu" role="menu">
+                {sortOptions.map((option) => {
+                  const isActive = option.value === sortBy;
+
+                  return (
+                    <button
+                      key={option.value}
+                      type="button"
+                      role="menuitemradio"
+                      aria-checked={isActive}
+                      className="catalog-sort-option"
+                      data-active={isActive}
+                      onClick={() => {
+                        setSortBy(option.value);
+                        setIsSortOpen(false);
+                      }}
+                    >
+                      <span className="catalog-sort-check" aria-hidden="true">
+                        {isActive ? "✓" : ""}
+                      </span>
+                      <span className="display-font">{option.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       <div className="catalog-shell" style={{ marginTop: 16 }}>

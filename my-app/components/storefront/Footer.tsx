@@ -84,8 +84,8 @@ export function Footer() {
                 color: "rgba(255,255,255,0.7)",
               }}
             >
-              <span>+44 221 133 5360</span>
-              <span>customercare@mettamuse.com</span>
+              <span>8013559045</span>
+              <span>kkausik11@gmail.com</span>
             </div>
           </section>
 
