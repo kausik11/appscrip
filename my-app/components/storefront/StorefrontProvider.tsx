@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { filterSections } from "./data";
+import type { FilterSection } from "./types";
 
 type SortOption = "recommended" | "newest" | "wishlist";
 
@@ -18,24 +18,32 @@ type StorefrontContextValue = {
   toggleSection: (sectionId: string) => void;
 };
 
-const initialFilters = Object.fromEntries(
-  filterSections.map((section) => [section.id, "All"]),
-);
-
-const initialExpanded = Object.fromEntries(
-  filterSections.map((section, index) => [section.id, index < 4]),
-);
-
 const StorefrontContext = createContext<StorefrontContextValue | null>(null);
 
-export function StorefrontProvider({ children }: { children: ReactNode }) {
+function buildInitialFilters(filterSections: FilterSection[]) {
+  return Object.fromEntries(filterSections.map((section) => [section.id, "All"]));
+}
+
+function buildInitialExpanded(filterSections: FilterSection[]) {
+  return Object.fromEntries(
+    filterSections.map((section, index) => [section.id, index < 4]),
+  );
+}
+
+export function StorefrontProvider({
+  children,
+  filterSections,
+}: {
+  children: ReactNode;
+  filterSections: FilterSection[];
+}) {
   const [sortBy, setSortBy] = useState<SortOption>("recommended");
   const [favorites, setFavorites] = useState<string[]>(["loop-strap"]);
   const [customizableOnly, setCustomizableOnly] = useState(false);
   const [selectedFilters, setSelectedFilters] =
-    useState<Record<string, string>>(initialFilters);
+    useState<Record<string, string>>(() => buildInitialFilters(filterSections));
   const [expandedSections, setExpandedSections] =
-    useState<Record<string, boolean>>(initialExpanded);
+    useState<Record<string, boolean>>(() => buildInitialExpanded(filterSections));
 
   const value: StorefrontContextValue = {
     customizableOnly,

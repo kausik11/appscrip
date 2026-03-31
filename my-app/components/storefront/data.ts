@@ -14,48 +14,7 @@ export const navItems = [
   "Contact Us",
 ];
 
-export const filterSections: FilterSection[] = [
-  {
-    id: "idealFor",
-    label: "Ideal For",
-    options: ["All", "Travel", "Work", "Weekend", "Gift"],
-  },
-  {
-    id: "occasion",
-    label: "Occasion",
-    options: ["All", "Daily", "Office", "Getaway", "Celebration"],
-  },
-  {
-    id: "work",
-    label: "Work",
-    options: ["All", "Creative", "Studio", "Hybrid", "Commute"],
-  },
-  {
-    id: "fabric",
-    label: "Fabric",
-    options: ["All", "Canvas", "Crochet", "Leather", "Mixed"],
-  },
-  {
-    id: "segment",
-    label: "Segment",
-    options: ["All", "Bags", "Small Goods", "Soft Toys", "Accessories"],
-  },
-  {
-    id: "suitableFor",
-    label: "Suitable For",
-    options: ["All", "Women", "Men", "Kids", "Unisex"],
-  },
-  {
-    id: "rawMaterials",
-    label: "Raw Materials",
-    options: ["All", "Natural Fiber", "Leather", "Cotton", "Recycled"],
-  },
-  {
-    id: "pattern",
-    label: "Pattern",
-    options: ["All", "Solid", "Marled", "Striped", "Woven"],
-  },
-];
+export const filterSections: FilterSection[] = [];
 
 export const products: Product[] = [
   {
@@ -398,23 +357,7 @@ const productArtSequence: Product["art"][] = [
   "satchel",
 ];
 
-function mapCategoryToSegment(category: string) {
-  const value = category.toLowerCase();
-
-  if (value.includes("bag")) return "Bags";
-  if (value.includes("shoe") || value.includes("watch") || value.includes("access")) {
-    return "Accessories";
-  }
-  if (value.includes("shirt") || value.includes("dress") || value.includes("top")) {
-    return "Soft Toys";
-  }
-
-  return "Small Goods";
-}
-
 function mapDummyProduct(product: DummyJsonProduct, index: number): Product {
-  const segment = mapCategoryToSegment(product.category);
-
   return {
     id: String(product.id),
     name: product.title,
@@ -432,16 +375,45 @@ function mapDummyProduct(product: DummyJsonProduct, index: number): Product {
     isOutOfStock: product.stock === 0,
     isNew: index < 4,
     tags: {
-      idealFor: index % 3 === 0 ? "Travel" : index % 3 === 1 ? "Work" : "Weekend",
-      occasion: index % 2 === 0 ? "Daily" : "Office",
-      work: index % 2 === 0 ? "Hybrid" : "Creative",
-      fabric: segment === "Accessories" ? "Leather" : "Canvas",
-      segment,
-      suitableFor: "Unisex",
-      rawMaterials: segment === "Accessories" ? "Leather" : "Recycled",
-      pattern: product.tags?.includes("fragrance") ? "Woven" : "Solid",
+      category: product.category,
+      brand: product.brand ?? "Unbranded",
+      availability: product.availabilityStatus ?? (product.stock > 0 ? "In Stock" : "Out of Stock"),
+      tags: product.tags ?? [],
     },
   };
+}
+
+export function buildFilterSections(products: Product[]): FilterSection[] {
+  const sectionConfig = [
+    { id: "category", label: "Category" },
+    { id: "brand", label: "Brand" },
+    { id: "availability", label: "Availability" },
+    { id: "tags", label: "Tags" },
+  ] as const;
+
+  return sectionConfig.map(({ id, label }) => {
+    const values = new Set<string>();
+
+    for (const product of products) {
+      const value = product.tags[id];
+
+      if (Array.isArray(value)) {
+        for (const item of value) {
+          if (item) {
+            values.add(item);
+          }
+        }
+      } else if (value) {
+        values.add(value);
+      }
+    }
+
+    return {
+      id,
+      label,
+      options: ["All", ...Array.from(values).sort((a, b) => a.localeCompare(b))],
+    };
+  });
 }
 
 export async function getProducts(): Promise<Product[]> {

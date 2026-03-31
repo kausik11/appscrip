@@ -20,7 +20,7 @@ export type Product = {
   badge?: string;
   isOutOfStock?: boolean;
   isNew?: boolean;
-  tags: Record<string, string>;
+  tags: Record<string, string | string[]>;
 };
 
 export type FilterSection = {

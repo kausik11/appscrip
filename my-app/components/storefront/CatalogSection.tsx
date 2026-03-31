@@ -14,8 +14,12 @@ export function CatalogSection({
   filterSections,
   products,
 }: CatalogSectionProps) {
+  const providerKey = filterSections
+    .map((section) => `${section.id}:${section.options.join("|")}`)
+    .join(";");
+
   return (
-    <StorefrontProvider>
+    <StorefrontProvider key={providerKey} filterSections={filterSections}>
       <CatalogSectionBody filterSections={filterSections} products={products} />
     </StorefrontProvider>
   );
@@ -29,13 +33,23 @@ function CatalogSectionBody({
     useStorefront();
 
   let visibleProducts = products.filter((product) => {
-    if (customizableOnly && product.tags.segment !== "Accessories") {
+    if (customizableOnly && product.isOutOfStock) {
       return false;
     }
 
     return filterSections.every((section) => {
       const selected = selectedFilters[section.id];
-      return selected === "All" || product.tags[section.id] === selected;
+      const value = product.tags[section.id];
+
+      if (selected === "All") {
+        return true;
+      }
+
+      if (Array.isArray(value)) {
+        return value.includes(selected);
+      }
+
+      return value === selected;
     });
   });
 
