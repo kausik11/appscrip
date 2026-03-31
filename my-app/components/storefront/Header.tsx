@@ -1,5 +1,12 @@
 import Image from "next/image";
-import { BagIcon, ChevronIcon, GlobeIcon, HeartIcon, SearchIcon, UserIcon } from "./icons";
+import {
+  HiMiniChevronUp,
+  HiOutlineHeart,
+  HiOutlineMagnifyingGlass,
+  HiOutlineUser,
+} from "react-icons/hi2";
+import { IoBagOutline } from "react-icons/io5";
+import { LuGlobe } from "react-icons/lu";
 
 type HeaderProps = {
   navItems: string[];
@@ -39,23 +46,23 @@ export function Header({ navItems }: HeaderProps) {
           }}
         >
           <button className="icon-button" aria-label="Search">
-            <SearchIcon />
+            <HiOutlineMagnifyingGlass size={19} />
           </button>
           <button className="icon-button" aria-label="Wishlist">
-            <HeartIcon />
+            <HiOutlineHeart size={19} />
           </button>
           <button className="icon-button" aria-label="Bag">
-            <BagIcon />
+            <IoBagOutline size={18} />
           </button>
           <button className="icon-button" aria-label="Account">
-            <UserIcon />
+            <HiOutlineUser size={19} />
           </button>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <GlobeIcon size={16} />
+            <LuGlobe size={16} />
             <span className="display-font" style={{ fontSize: 11, letterSpacing: "0.08em" }}>
               Eng
             </span>
-            <ChevronIcon size={12} strokeWidth={1.4} style={{ transform: "rotate(180deg)" }} />
+            <HiMiniChevronUp size={12} />
           </div>
         </div>
       </div>
