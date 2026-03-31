@@ -118,6 +118,7 @@ function CatalogSectionBody({
 
   return (
     <section className="content-shell" style={{ paddingBottom: 56 }}>
+      <h2 className="sr-only">Product Catalog</h2>
       <div
         className="catalog-toolbar"
         style={{

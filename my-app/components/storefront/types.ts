@@ -15,6 +15,9 @@ export type Product = {
   price?: number;
   discountPercentage?: number;
   rating?: number;
+  brand?: string;
+  category?: string;
+  imageAlt?: string;
   art: ProductArt;
   image?: string;
   badge?: string;

@@ -64,7 +64,7 @@ export function ProductCard({ index, product }: ProductCardProps) {
         {product.image ? (
           <Image
             src={product.image}
-            alt={product.name}
+            alt={product.imageAlt ?? product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 820px) 50vw, 33vw"
             style={{ objectFit: "contain", padding: 20 }}

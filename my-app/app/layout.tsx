@@ -15,9 +15,26 @@ const bodyFont = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Logo | Discover Our Products",
+  title: {
+    default: "Metta Muse Storefront",
+    template: "%s | Metta Muse",
+  },
   description:
-    "Server-rendered product catalog with a luxury editorial storefront layout.",
+    "Browse the Metta Muse product catalog with curated beauty, fragrance, furniture, and grocery picks.",
+  applicationName: "Metta Muse",
+  keywords: [
+    "metta muse",
+    "product catalog",
+    "beauty products",
+    "fragrances",
+    "furniture",
+    "groceries",
+    "online store",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export const viewport: Viewport = {
