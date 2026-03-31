@@ -98,6 +98,41 @@ export function ProductCard({ index, product }: ProductCardProps) {
             </h3>
             <div
               style={{
+                marginTop: 8,
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 10,
+                alignItems: "center",
+                fontSize: 12,
+                lineHeight: 1.5,
+              }}
+            >
+              {product.price !== undefined && (
+                <span
+                  className="display-font"
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    letterSpacing: "0.03em",
+                    color: "var(--ink)",
+                  }}
+                >
+                  ${product.price.toFixed(2)}
+                </span>
+              )}
+              {product.discountPercentage !== undefined && (
+                <span style={{ color: "var(--accent)" }}>
+                  {product.discountPercentage.toFixed(2)}% off
+                </span>
+              )}
+              {product.rating !== undefined && (
+                <span style={{ color: "var(--muted)" }}>
+                  Rating {product.rating.toFixed(1)}
+                </span>
+              )}
+            </div>
+            <div
+              style={{
                 marginTop: 6,
                 fontSize: 11,
                 color: "var(--muted)",

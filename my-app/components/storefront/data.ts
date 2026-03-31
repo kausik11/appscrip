@@ -374,6 +374,7 @@ type DummyJsonProduct = {
   title: string;
   category: string;
   price: number;
+  rating?: number;
   thumbnail?: string;
   images?: string[];
   availabilityStatus?: string;
@@ -422,6 +423,9 @@ function mapDummyProduct(product: DummyJsonProduct, index: number): Product {
       product.discountPercentage && product.discountPercentage > 0
         ? `${product.discountPercentage.toFixed(0)}% off`
         : "Recommended",
+    price: product.price,
+    discountPercentage: product.discountPercentage,
+    rating: product.rating,
     art: productArtSequence[index % productArtSequence.length],
     image: product.thumbnail ?? product.images?.[0],
     badge: product.stock === 0 ? "Out of stock" : undefined,
