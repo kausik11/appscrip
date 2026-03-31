@@ -15,12 +15,14 @@ type StorefrontContextValue = {
   customizableOnly: boolean;
   expandedSections: Record<string, boolean>;
   favorites: string[];
+  filtersVisible: boolean;
   selectedFilters: Record<string, string>;
   sortBy: SortOption;
   setFilter: (sectionId: string, value: string) => void;
   setSortBy: (value: SortOption) => void;
   toggleCustomizable: () => void;
   toggleFavorite: (productId: string) => void;
+  toggleFiltersVisible: () => void;
   toggleSection: (sectionId: string) => void;
 };
 
@@ -46,6 +48,7 @@ export function StorefrontProvider({
   const [sortBy, setSortBy] = useState<SortOption>("recommended");
   const [favorites, setFavorites] = useState<string[]>(["loop-strap"]);
   const [customizableOnly, setCustomizableOnly] = useState(false);
+  const [filtersVisible, setFiltersVisible] = useState(true);
   const [selectedFilters, setSelectedFilters] =
     useState<Record<string, string>>(() => buildInitialFilters(filterSections));
   const [expandedSections, setExpandedSections] =
@@ -55,12 +58,14 @@ export function StorefrontProvider({
     customizableOnly,
     expandedSections,
     favorites,
+    filtersVisible,
     selectedFilters,
     sortBy,
     setFilter: (sectionId, value) =>
       setSelectedFilters((current) => ({ ...current, [sectionId]: value })),
     setSortBy,
     toggleCustomizable: () => setCustomizableOnly((current) => !current),
+    toggleFiltersVisible: () => setFiltersVisible((current) => !current),
     toggleFavorite: (productId) =>
       setFavorites((current) =>
         current.includes(productId)

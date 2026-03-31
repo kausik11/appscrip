@@ -41,8 +41,15 @@ function CatalogSectionBody({
 }: CatalogSectionProps) {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const sortMenuRef = useRef<HTMLDivElement | null>(null);
-  const { customizableOnly, favorites, selectedFilters, setSortBy, sortBy } =
-    useStorefront();
+  const {
+    customizableOnly,
+    favorites,
+    filtersVisible,
+    selectedFilters,
+    setSortBy,
+    sortBy,
+    toggleFiltersVisible,
+  } = useStorefront();
 
   useEffect(() => {
     function handlePointerDown(event: MouseEvent) {
@@ -143,7 +150,10 @@ function CatalogSectionBody({
             {products.length} Items
           </span>
           <button
+            type="button"
             className="icon-button body-muted"
+            aria-pressed={!filtersVisible}
+            onClick={toggleFiltersVisible}
             style={{
               fontSize: 12,
               letterSpacing: "0.18em",
@@ -152,7 +162,7 @@ function CatalogSectionBody({
               textUnderlineOffset: 4,
             }}
           >
-            Hide Filter
+            {filtersVisible ? "Hide Filter" : "Show Filter"}
           </button>
         </div>
 
@@ -223,8 +233,11 @@ function CatalogSectionBody({
         </div>
       </div>
 
-      <div className="catalog-shell" style={{ marginTop: 16 }}>
-        <FiltersSidebar sections={filterSections} />
+      <div
+        className={`catalog-shell${filtersVisible ? "" : " catalog-shell-full"}`}
+        style={{ marginTop: 16 }}
+      >
+        {filtersVisible && <FiltersSidebar sections={filterSections} />}
 
         <div className="product-grid">
           {visibleProducts.map((product, index) => (

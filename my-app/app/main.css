@@ -81,6 +81,10 @@ img {
   align-items: start;
 }
 
+.catalog-shell-full {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
