@@ -4,7 +4,6 @@ import { Header } from "@/components/storefront/Header";
 import { Hero } from "@/components/storefront/Hero";
 import { TopStrip } from "@/components/storefront/TopStrip";
 import {
-  featuredStats,
   filterSections,
   getProducts,
   navItems,
@@ -18,7 +17,7 @@ export default async function Home() {
     <main className="page-shell">
       <TopStrip items={utilityLinks} />
       <Header navItems={navItems} />
-      <Hero stats={featuredStats} />
+      <Hero />
       <CatalogSection products={products} filterSections={filterSections} />
       <Footer />
     </main>

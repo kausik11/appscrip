@@ -1,8 +1,4 @@
-type HeroProps = {
-  stats: string[];
-};
-
-export function Hero({ stats }: HeroProps) {
+export function Hero() {
   return (
     <section className="content-shell hero-section" style={{ padding: "54px 0 34px" }}>
       <div
@@ -34,26 +30,6 @@ export function Hero({ stats }: HeroProps) {
           Lorem ipsum dolor sit amet consectetur. Amet est posuere rhoncus
           scelerisque. Dolor integer scelerisque nibh amet mi ut elementum dolor.
         </p>
-      </div>
-
-      <div
-        className="hero-stats"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 16,
-          marginTop: 40,
-          paddingTop: 22,
-          borderTop: "1px solid var(--line)",
-          color: "var(--muted)",
-          fontSize: 11,
-          letterSpacing: "0.18em",
-          textTransform: "uppercase",
-        }}
-      >
-        {stats.map((stat) => (
-          <span key={stat}>{stat}</span>
-        ))}
       </div>
     </section>
   );

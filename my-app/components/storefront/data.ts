@@ -14,12 +14,6 @@ export const navItems = [
   "Contact Us",
 ];
 
-export const featuredStats = [
-  "3425 items",
-  "Hand-finished details",
-  "Worldwide delivery",
-];
-
 export const filterSections: FilterSection[] = [
   {
     id: "idealFor",
