@@ -1,13 +1,60 @@
 import { InstagramIcon, LinkedInIcon } from "./icons";
 
-const paymentBadges = [
-  { name: "G Pay", background: "#fff", color: "#222" },
-  { name: "MC", background: "#ffd167", color: "#222" },
-  { name: "PP", background: "#f0f4ff", color: "#124f9e" },
-  { name: "Amex", background: "#2a6ad8", color: "#fff" },
-  { name: "Apple Pay", background: "#111", color: "#fff" },
-  { name: "D Pay", background: "#7347ff", color: "#fff" },
-];
+const paymentBadges = ["gpay", "mastercard", "paypal", "amex", "applepay", "opay"] as const;
+
+function PaymentBadge({ type }: { type: (typeof paymentBadges)[number] }) {
+  if (type === "gpay") {
+    return (
+      <span className="payment-badge payment-badge-light">
+        <span className="payment-g">G</span>
+        <span>Pay</span>
+      </span>
+    );
+  }
+
+  if (type === "mastercard") {
+    return (
+      <span className="payment-badge payment-badge-light">
+        <span className="payment-mastercard">
+          <span className="payment-mastercard-left" />
+          <span className="payment-mastercard-right" />
+        </span>
+      </span>
+    );
+  }
+
+  if (type === "paypal") {
+    return (
+      <span className="payment-badge payment-badge-light">
+        <span className="payment-paypal-mark">P</span>
+        <span className="payment-paypal-word">PayPal</span>
+      </span>
+    );
+  }
+
+  if (type === "amex") {
+    return (
+      <span className="payment-badge payment-badge-amex">
+        <span className="payment-amex-word">AMEX</span>
+      </span>
+    );
+  }
+
+  if (type === "applepay") {
+    return (
+      <span className="payment-badge payment-badge-light">
+        <span className="payment-apple-word"> Pay</span>
+      </span>
+    );
+  }
+
+  return (
+    <span className="payment-badge payment-badge-opay">
+      <span className="payment-opay-ring" />
+      <span>Pay</span>
+    </span>
+  );
+}
 
 export function Footer() {
   return (
@@ -15,12 +62,12 @@ export function Footer() {
       style={{
         background: "#060606",
         color: "#fff",
-        padding: "42px 0 28px",
+        padding: "56px 0 28px",
       }}
     >
       <div className="content-shell">
-        <div className="footer-grid" style={{ paddingBottom: 32 }}>
-          <section>
+        <div className="footer-top" style={{ paddingBottom: 32 }}>
+          <section className="footer-newsletter">
             <h2
               className="display-font"
               style={{ margin: 0, fontSize: 18, fontWeight: 700 }}
@@ -29,10 +76,10 @@ export function Footer() {
             </h2>
             <p
               style={{
-                margin: "12px 0 22px",
-                fontSize: 13,
+                margin: "22px 0 42px",
+                fontSize: 14,
                 color: "rgba(255,255,255,0.64)",
-                lineHeight: 1.7,
+                lineHeight: 1.6,
               }}
             >
               Sign up for updates from metta muse.
@@ -45,22 +92,25 @@ export function Footer() {
                 style={{
                   background: "#f3f3f3",
                   border: 0,
-                  minHeight: 44,
-                  padding: "0 14px",
+                  minHeight: 58,
+                  padding: "0 28px",
                   color: "#181512",
+                  fontSize: 16,
                 }}
               />
               <button
                 className="newsletter-submit"
                 type="submit"
                 style={{
-                  minHeight: 44,
+                  minHeight: 58,
+                  minWidth: 184,
                   padding: "0 26px",
                   border: "1px solid rgba(255,255,255,0.22)",
                   background: "transparent",
-                  color: "rgba(255,255,255,0.75)",
+                  color: "rgba(255,255,255,0.24)",
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",
+                  fontWeight: 700,
                 }}
               >
                 Subscribe
@@ -68,45 +118,53 @@ export function Footer() {
             </form>
           </section>
 
-          <section>
-            <h2
-              className="display-font"
-              style={{ margin: 0, fontSize: 18, fontWeight: 700 }}
-            >
-              Contact Us
-            </h2>
-            <div
-              style={{
-                display: "grid",
-                gap: 8,
-                marginTop: 12,
-                fontSize: 13,
-                color: "rgba(255,255,255,0.7)",
-              }}
-            >
-              <span>8013559045</span>
-              <span>kkausik11@gmail.com</span>
-            </div>
-          </section>
-
-          <section>
-            <h2
-              className="display-font"
-              style={{ margin: 0, fontSize: 18, fontWeight: 700 }}
-            >
-              Currency
-            </h2>
-            <div style={{ marginTop: 12, fontSize: 13, color: "rgba(255,255,255,0.7)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ fontSize: 16 }}>🇺🇸</span>
-                <strong style={{ color: "#fff" }}>USD</strong>
+          <div className="footer-contact-stack">
+            <section>
+              <h2
+                className="display-font"
+                style={{ margin: 0, fontSize: 18, fontWeight: 700 }}
+              >
+                Contact Us
+              </h2>
+              <div
+                style={{
+                  display: "grid",
+                  gap: 18,
+                  marginTop: 22,
+                  fontSize: 14,
+                  color: "rgba(255,255,255,0.9)",
+                }}
+              >
+                <span>+44 221 133 5360</span>
+                <span>customercare@mettamuse.com</span>
               </div>
-              <p style={{ margin: "12px 0 0", lineHeight: 1.7 }}>
-                Transactions will be completed in Euros and a currency reference
-                is available on hover.
-              </p>
-            </div>
-          </section>
+            </section>
+
+            <section style={{ marginTop: 34 }}>
+              <h2
+                className="display-font"
+                style={{ margin: 0, fontSize: 18, fontWeight: 700 }}
+              >
+                Currency
+              </h2>
+              <div style={{ marginTop: 18, fontSize: 13, color: "rgba(255,255,255,0.7)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontSize: 28, lineHeight: 1 }}>🇺🇸</span>
+                  <span style={{ fontSize: 10, color: "rgba(255,255,255,0.7)" }}>•</span>
+                  <strong
+                    className="display-font"
+                    style={{ color: "#fff", fontSize: 18, letterSpacing: "0.04em" }}
+                  >
+                    USD
+                  </strong>
+                </div>
+                <p style={{ margin: "18px 0 0", lineHeight: 1.7, maxWidth: 420 }}>
+                  Transactions will be completed in Euros and a currency reference
+                  is available on hover.
+                </p>
+              </div>
+            </section>
+          </div>
         </div>
 
         <hr
@@ -227,24 +285,7 @@ export function Footer() {
                 }}
               >
                 {paymentBadges.map((badge) => (
-                  <span
-                    key={badge.name}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      minWidth: 32,
-                      height: 22,
-                      padding: "0 8px",
-                      borderRadius: 4,
-                      background: badge.background,
-                      color: badge.color,
-                      fontSize: 10,
-                      fontWeight: 700,
-                    }}
-                  >
-                    {badge.name}
-                  </span>
+                  <PaymentBadge key={badge} type={badge} />
                 ))}
               </div>
             </div>
